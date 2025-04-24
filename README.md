@@ -2,21 +2,35 @@
 
 ![Quantum Physics](https://img.shields.io/badge/Physics-Quantum-blue) 
 ![C++](https://img.shields.io/badge/Language-C++-orange) 
-![SDL](https://img.shields.io/badge/Graphics-SDL2-green)
 ![Monte Carlo](https://img.shields.io/badge/Method-Monte_Carlo-purple)
 
-A stunning visualization of quantum mechanics' most famous paradox - demonstrating wave-particle duality through Monte Carlo simulation.
+## Introduction
 
-## Key Features
+I did this project for my Programming 2 project work. It's computational implementation of the famous quantum double-slit experiment using Monte Carlo methods, demonstrating wave-particle duality through numerical simulation. The system models the probability distribution of particle impacts on a detection screen after passing through two slits.
 
-- **Real-time quantum interference visualization**
-- **Customizable experimental parameters**
-- **Quantum measurement effects simulation**
-- **Beautiful SDL2 graphics engine**
-- **Scientific accuracy with Monte Carlo methods**
+##Physical Model
 
-```c++
-// Quantum magic happening here
-double probability = (1/(d*d + pow(x+l/2,2))) 
-                   + (1/(d*d + pow(x-l/2,2)))
-                   + P*2*cos(omega)/sqrt((d*d+pow(x+l/2,2))*(d*d+pow(x-l/2,2)));
+The simulation calculates the quantum mechanical probability distribution using:
+
+$$
+P(x) = \frac{1}{d^2 + (x + \frac{l}{2})^2} + \frac{1}{d^2 + (x - \frac{l}{2})^2} + \frac{2P\cos(\omega)}{\sqrt{[d^2 + (x + \frac{l}{2})^2][d^2 + (x - \frac{l}{2})^2]}}
+$$
+
+Where the phase difference ω is given by:
+
+$$
+\omega = k\left(\sqrt{d^2 + \left(x - \frac{l}{2}\right)^2} - \sqrt{d^2 + \left(x + \frac{l}{2}\right)^2}\right)
+$$
+
+Parameters:
+- $d$: Screen distance from slits
+- $l$: Slit separation
+- $x$: Position on detection screen
+- $P = 1 - P_{\text{measure}}$: Quantum decoherence factor
+- $k = \frac{\sqrt{2mE}}{\hbar}$: Wave number (set to 7 for scaling)
+
+## Installation
+
+### Requirements
+- C++ compiler
+- SDL2 and SDL2_ttf libraries
