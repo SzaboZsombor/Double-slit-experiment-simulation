@@ -7,7 +7,7 @@
 
 ## Introduction
 
-It's computational implementation of the famous quantum double-slit experiment using Monte Carlo methods, demonstrating wave-particle duality through numerical simulation. The system models the probability distribution of particle impacts on a detection screen after passing through two slits.
+It's computational implementation of the famous quantum double-slit experiment using Monte Carlo methods, demonstrating wave-particle duality through numerical simulation. The system models the probability distribution of particle impacts on a detection screen after passing through two slits. It also makes an animation of the scattering electrons (SDL). 
 
 ## Physical Model
 
