@@ -3,10 +3,11 @@
 ![Quantum Physics](https://img.shields.io/badge/Physics-Quantum-blue) 
 ![C++](https://img.shields.io/badge/Language-C++-orange) 
 ![Monte Carlo](https://img.shields.io/badge/Method-Monte_Carlo-purple)
+## This project was made as part of the Programming 2 course during my second semester.
 
 ## Introduction
 
-I did this project for my Programming 2 project work. It's computational implementation of the famous quantum double-slit experiment using Monte Carlo methods, demonstrating wave-particle duality through numerical simulation. The system models the probability distribution of particle impacts on a detection screen after passing through two slits.
+It's computational implementation of the famous quantum double-slit experiment using Monte Carlo methods, demonstrating wave-particle duality through numerical simulation. The system models the probability distribution of particle impacts on a detection screen after passing through two slits.
 
 ##Physical Model
 
@@ -27,9 +28,8 @@ Parameters:
 - $l$: Slit separation
 - $x$: Position on detection screen
 - $P = 1 - P_{\text{measure}}$: Quantum decoherence factor
-- $k = \frac{\sqrt{2mE}}{\hbar}$: Wave number (set to 7 for scaling)
+- $k = \frac{\sqrt{2mE}}{\hbar}$: Wave number
 
-## Installation
 
 ### Requirements
 - C++ compiler
