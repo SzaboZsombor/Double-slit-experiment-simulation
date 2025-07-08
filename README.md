@@ -1,8 +1,7 @@
-# Quantum Double-Slit Monte Carlo Simulation
+# Quantum Double-Slit Experiment Simulation
 
 ![Quantum Physics](https://img.shields.io/badge/Physics-Quantum-blue) 
 ![C++](https://img.shields.io/badge/Language-C++-orange) 
-![Monte Carlo](https://img.shields.io/badge/Method-Monte_Carlo-purple)
 ### This project was made as part of the Programming 2 course during my second semester.
 
 ## Introduction
