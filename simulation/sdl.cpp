@@ -1,5 +1,7 @@
-#include <SDL_ttf.h>
-#include "SDL.h"
+#include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL.h>
+#include <iostream>
+#include "sdl.h"
 
 
 bool SDL::Init() {
@@ -26,7 +28,7 @@ bool SDL::CreateRenderer() {
 }
 
 bool SDL::OpenFont(int betumeret) {
-    font = TTF_OpenFont("D:\\SDL\\SDL2_ttf-2.22.0\\Poppins-Regular.ttf", betumeret);
+    font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", betumeret);
     if (!font) {
         std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
         TTF_Quit();
@@ -65,8 +67,8 @@ void SDL::End() {
 
 
 void Writer::ReszecskeSzamOut(SDL& sdl) {
-    sdl.font = TTF_OpenFont("D:\\SDL\\SDL2_ttf-2.22.0\\Poppins-Regular.ttf", 24);
-    reszecskeszam = "Részecskék száma: " + std::to_string(kilott);
+    sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24);
+    reszecskeszam = "Rï¿½szecskï¿½k szï¿½ma: " + std::to_string(kilott);
     textSurface = TTF_RenderText_Solid(sdl.font, reszecskeszam.c_str(), textColor);
     textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
     textRect = { 30, 30, textSurface->w, textSurface->h };
@@ -78,9 +80,9 @@ void Writer::hatter(SDL& sdl) {
 
 
 
-    sdl.font = TTF_OpenFont("D:\\SDL\\SDL2_ttf-2.22.0\\Poppins-Regular.ttf", 24);
+    sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24);
 
-    std::string felirat = "Kétrés-kísérlet szimulációja";
+    std::string felirat = "Kï¿½trï¿½s-kï¿½sï¿½rlet szimulï¿½ciï¿½ja";
     textSurface = TTF_RenderText_Solid(sdl.font, felirat.c_str(), textColor);
     textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
     textRect = { 440, 400, textSurface->w, textSurface->h };
@@ -98,15 +100,15 @@ void Writer::hatter(SDL& sdl) {
     textRect = { 620, 20, textSurface->w, textSurface->h };
     SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
 
-    sdl.font = TTF_OpenFont("D:\\SDL\\SDL2_ttf-2.22.0\\Poppins-Regular.ttf", 9);
-    std::string beutesek = "beütések száma";
+    sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 9);
+    std::string beutesek = "beï¿½tï¿½sek szï¿½ma";
     textSurface = TTF_RenderText_Solid(sdl.font, beutesek.c_str(), textColor);
     textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
     textRect = { 640, 40, textSurface->w, textSurface->h };
     SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
 
 
-    //kirajzolják a tengelyeket és a rések helyét 
+    //kirajzoljï¿½k a tengelyeket ï¿½s a rï¿½sek helyï¿½t 
 
     SDL_SetRenderDrawColor(sdl.renderer, 255, 255, 255, 255);
     SDL_RenderDrawLine(sdl.renderer, 0, int(0.6 * WINDOW_HEIGHT), WINDOW_WIDTH, int(0.6 * WINDOW_HEIGHT));

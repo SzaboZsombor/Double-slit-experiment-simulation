@@ -1,5 +1,5 @@
-#include<SDL.h>
-#include<SDL_ttf.h>
+#include<SDL2/SDL.h>
+#include<SDL2/SDL_ttf.h>
 #include<iostream>
 #include<vector>
 #include <string>
@@ -22,7 +22,7 @@ void sdlsetup(SDL& sdl) { //Itt az SDL tajgait inicializaljuk
     }
 }
 
-void indentalas(valoszinuseg& pontok) {//Itt a két-rés kísérlet elrendezését kérjük be az inputrol
+void indentalas(valoszinuseg& pontok) {//Itt a kï¿½t-rï¿½s kï¿½sï¿½rlet elrendezï¿½sï¿½t kï¿½rjï¿½k be az inputrol
     double d, l;
     std::cout << "Add meg a ket res tavolsagat: ";
     std::cin >> l;
@@ -55,7 +55,7 @@ void indentalas(valoszinuseg& pontok) {//Itt a két-rés kísérlet elrendezését kér
 
 }
 
-int SDL_main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) {
 
     srand(static_cast<unsigned int>(time(nullptr)));
 
@@ -69,7 +69,7 @@ int SDL_main(int argc, char* argv[]) {
 
     writer.TextColorSetter(255, 255, 255);
 
-    std::ofstream file("D:/Iskola/double_slit/mentes.txt", std::ofstream::trunc);//megnyitja a mentes.txt file-t es kitorli az eddigi tartalmat
+    std::ofstream file("./mentes.txt", std::ofstream::trunc);//megnyitja a mentes.txt file-t es kitorli az eddigi tartalmat
     if (!file.is_open()) {
         std::cerr << "Nem talalhato a fajl" << std::endl;
     }
