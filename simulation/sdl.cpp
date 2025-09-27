@@ -19,7 +19,7 @@ bool SDL::Init() {
 bool SDL::CreateRenderer() {
     renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
     if (renderer == nullptr) {
-        std::cerr << "Failed to create renderer: " << SDL_GetError() << std::endl;
+        std::cerr << "Nem sikerult a renderer letrehozasa: " << SDL_GetError() << std::endl;
         SDL_DestroyWindow(window);
         SDL_Quit();
         return false;
@@ -30,7 +30,7 @@ bool SDL::CreateRenderer() {
 bool SDL::OpenFont(int betumeret) {
     font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", betumeret);
     if (!font) {
-        std::cerr << "Failed to load font: " << TTF_GetError() << std::endl;
+        std::cerr << "Nem sikerult a betutipus megnyitasa: " << TTF_GetError() << std::endl;
         TTF_Quit();
         SDL_Quit();
         return false;
@@ -42,7 +42,7 @@ bool SDL::OpenFont(int betumeret) {
 bool SDL::CreateWindow() {
     window = SDL_CreateWindow("Double slit simulation", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WINDOW_WIDTH, WINDOW_HEIGHT, SDL_WINDOW_SHOWN);
     if (window == nullptr) {
-        std::cerr << "Failed to create window: " << SDL_GetError() << std::endl;
+        std::cerr << "Nem sikerult az ablak letrehozasa: " << SDL_GetError() << std::endl;
         SDL_Quit();
         return false;
     }
@@ -68,44 +68,82 @@ void SDL::End() {
 
 void Writer::ReszecskeSzamOut(SDL& sdl) {
     sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24);
-    reszecskeszam = "R�szecsk�k sz�ma: " + std::to_string(kilott);
-    textSurface = TTF_RenderText_Solid(sdl.font, reszecskeszam.c_str(), textColor);
+    if (!sdl.font) {
+        std::cerr << "Nem sikerult a betutipus megnyitasa: " << TTF_GetError() << std::endl;
+        return;
+    }
+    reszecskeszam = "Részecskék száma: " + std::to_string(kilott);
+    textSurface = TTF_RenderUTF8_Solid(sdl.font, reszecskeszam.c_str(), textColor);
+    if (!textSurface) {
+        std::cerr << "Nem sikerult a szoveg megjelenitese: " << TTF_GetError() << std::endl;
+        TTF_CloseFont(sdl.font);
+        sdl.font = nullptr;
+        return;
+    }
     textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
     textRect = { 30, 30, textSurface->w, textSurface->h };
     SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+    SDL_FreeSurface(textSurface);
+    SDL_DestroyTexture(textTexture);
+    TTF_CloseFont(sdl.font);
+    sdl.font = nullptr;
     kilott++;
 }
 
 void Writer::hatter(SDL& sdl) {
-
-
-
     sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 24);
+    if (!sdl.font) {
+        std::cerr << "Nem sikerult a betutipus megnyitasa: " << TTF_GetError() << std::endl;
+        return;
+    }
 
-    std::string felirat = "K�tr�s-k�s�rlet szimul�ci�ja";
-    textSurface = TTF_RenderText_Solid(sdl.font, felirat.c_str(), textColor);
-    textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
-    textRect = { 440, 400, textSurface->w, textSurface->h };
-    SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+    std::string felirat = "Kétrés-kísérlet szimulációja";
+    textSurface = TTF_RenderUTF8_Solid(sdl.font, felirat.c_str(), textColor);
+    if (textSurface) {
+        textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
+        textRect = { 440, 400, textSurface->w, textSurface->h };
+        SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+        SDL_FreeSurface(textSurface);
+        SDL_DestroyTexture(textTexture);
+    }
 
     std::string xten = "x";
-    textSurface = TTF_RenderText_Solid(sdl.font, xten.c_str(), textColor);
-    textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
-    textRect = { 1175, 370, textSurface->w, textSurface->h };
-    SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+    textSurface = TTF_RenderUTF8_Solid(sdl.font, xten.c_str(), textColor);
+    if (textSurface) {
+        textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
+        textRect = { 1175, 370, textSurface->w, textSurface->h };
+        SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+        SDL_FreeSurface(textSurface);
+        SDL_DestroyTexture(textTexture);
+    }
 
     std::string N = "N";
-    textSurface = TTF_RenderText_Solid(sdl.font, N.c_str(), textColor);
-    textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
-    textRect = { 620, 20, textSurface->w, textSurface->h };
-    SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+    textSurface = TTF_RenderUTF8_Solid(sdl.font, N.c_str(), textColor);
+    if (textSurface) {
+        textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
+        textRect = { 620, 20, textSurface->w, textSurface->h };
+        SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+        SDL_FreeSurface(textSurface);
+        SDL_DestroyTexture(textTexture);
+    }
 
+    TTF_CloseFont(sdl.font);
     sdl.font = TTF_OpenFont("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 9);
-    std::string beutesek = "be�t�sek sz�ma";
-    textSurface = TTF_RenderText_Solid(sdl.font, beutesek.c_str(), textColor);
-    textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
-    textRect = { 640, 40, textSurface->w, textSurface->h };
-    SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+    if (!sdl.font) {
+        std::cerr << "Nem sikerult a betutipus megnyitasa: " << TTF_GetError() << std::endl;
+        return;
+    }
+    std::string beutesek = "beütések száma";
+    textSurface = TTF_RenderUTF8_Solid(sdl.font, beutesek.c_str(), textColor);
+    if (textSurface) {
+        textTexture = SDL_CreateTextureFromSurface(sdl.renderer, textSurface);
+        textRect = { 640, 40, textSurface->w, textSurface->h };
+        SDL_RenderCopy(sdl.renderer, textTexture, NULL, &textRect);
+        SDL_FreeSurface(textSurface);
+        SDL_DestroyTexture(textTexture);
+    }
+    TTF_CloseFont(sdl.font);
+    sdl.font = nullptr;
 
 
     //kirajzolj�k a tengelyeket �s a r�sek hely�t 
